@@ -634,10 +634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 25
-  moveUpKey: 119
-  moveDownKey: 115
-  moveLeftKey: 97
-  moveRightKey: 100
+  playerInputAction: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

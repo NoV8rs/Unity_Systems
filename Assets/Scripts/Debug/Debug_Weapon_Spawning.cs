@@ -10,10 +10,10 @@ public class Debug_Weapon_Spawning : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnWeapon();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    SpawnWeapon();
+        //}
     }
     
     private void SpawnWeapon()

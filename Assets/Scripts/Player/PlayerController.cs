@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -12,16 +13,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     
     [Header("Keyboard Bindings")]
-    [SerializeField] private KeyCode moveUpKey = KeyCode.W;
-    [SerializeField] private KeyCode moveDownKey = KeyCode.S;
-    [SerializeField] private KeyCode moveLeftKey = KeyCode.A;
-    [SerializeField] private KeyCode moveRightKey = KeyCode.D;
+    [SerializeField] private InputActionReference playerInputAction;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _collider2D = GetComponent<CircleCollider2D>();
+    }
+    
+    void OnEnable()
+    {
+        playerInputAction.action.Enable();
+    }
+    
+    void OnDisable()
+    {
+        playerInputAction.action.Disable();
     }
 
     // Update is called once per frame
@@ -42,29 +50,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void ReadMovementInput()
     {
-        _movementInput = Vector2.zero;
-        
-        if (Input.GetKey(moveUpKey))
-        {
-            _movementInput.y += 1;
-        }
-
-        if (Input.GetKey(moveDownKey))
-        {
-            _movementInput.y -= 1;
-        }
-        
-        if (Input.GetKey(moveLeftKey))
-        {
-            _movementInput.x -= 1;
-        }
-        
-        if (Input.GetKey(moveRightKey))
-        {
-            _movementInput.x += 1;
-        }
-        
-        _movementInput.Normalize();
+        _movementInput = playerInputAction.action.ReadValue<Vector2>().normalized;
     }
 
     /// <summary>
